@@ -45,8 +45,12 @@ jobs:
     condition: succeededOrFailed()
     inputs:
       testResultsFormat: VSTest
-      testResultsFiles: '**/*.trx' 
-
+      testResultsFiles: '**/*.trx'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathToPublish: '$(Build.ArtifactStagingDirectory)'
+      artifactName: drop
+      
 - job: LinuxRelease
   pool:
     vmImage: 'Ubuntu 16.04'
